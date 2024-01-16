@@ -1,8 +1,10 @@
-package frc.robot.subsystems;
+package frc.robot.drivetrain;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.motorcontrol.PWMTalonSRX;
+
+import frc.robot.Constants;
 
 public class MechanumDrive extends SubsystemBase {
      // Motors
@@ -16,10 +18,10 @@ public class MechanumDrive extends SubsystemBase {
  
      public MechanumDrive() {
          // Motors
-         LEFT_FRONT_DRIVE_MOTOR = new PWMTalonSRX(0);
-         LEFT_BACK_DRIVE_MOTOR = new PWMTalonSRX(1);
-         RIGHT_FRONT_DRIVE_MOTOR = new PWMTalonSRX(2);
-         RIGHT_BACK_DRIVE_MOTOR = new PWMTalonSRX(3);
+         LEFT_FRONT_DRIVE_MOTOR = new PWMTalonSRX(Constants.MotorConstants.FRONT_LEFT);
+         LEFT_BACK_DRIVE_MOTOR = new PWMTalonSRX(Constants.MotorConstants.FRONT_RIGHT);
+         RIGHT_FRONT_DRIVE_MOTOR = new PWMTalonSRX(Constants.MotorConstants.BACK_LEFT);
+         RIGHT_BACK_DRIVE_MOTOR = new PWMTalonSRX(Constants.MotorConstants.BACK_RIGHT);
  
          // Gyro
          DRIVE_GYRO = new AnalogGyro(4);
