@@ -1,10 +1,11 @@
-package frc.robot.drivetrain.commands;
+package frc.robot.Drivetrain.Commands;
 
-import frc.robot.drivetrain.MechanumDrive;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.OI;
 
-public class FieldCentric extends Command{
+import frc.robot.OI;
+import frc.robot.Drivetrain.MechanumDrive;
+
+public class FieldCentric extends Command {
     public FieldCentric() {
 
     }
@@ -19,23 +20,23 @@ public class FieldCentric extends Command{
         // get joystick input
         double angle = Math.atan2(OI.driver.getRawAxis(1), OI.driver.getRawAxis(0));
         double magnitude = Math.hypot(OI.driver.getRawAxis(0), OI.driver.getRawAxis(1));
-        double twist = OI.driver.getRawAxis(2);
-
+        double twist = OI.driver.getTwist();
+        
         // use field centric controls by subtracting off the robot angle
-        angle -= MechanumDrive.DRIVE_GYRO.getAngle();
+        angle -= MechanumDrive.Gyro.getAngle();
 
-        MechanumDrive.setMecanumDrive(angle, magnitude, twist);
+        MechanumDrive.setMechanumDrive(angle, magnitude, twist);
     }
 
-    // Make this return true when this Command no longer needs to run execute()
-    public boolean isFinished() {
+     // Make this return true when this Command no longer needs to run execute()
+     public boolean isFinished() {
         return false;
     }
 
     // Called once after isFinished returns true
     public void end() {
         // sets all drive wheels to 0.0
-        MechanumDrive.setMecanumDrive(0.0, 0.0, 0.0);
+        MechanumDrive.setMechanumDrive(0.0, 0.0, 0.0);
     }
 
     // Called when another command which requires one or more of the same
