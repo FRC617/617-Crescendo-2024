@@ -4,12 +4,12 @@
 
 package frc.robot;
 
-import frc.robot.Drivetrain.MechanumDrive;
-import frc.robot.Drivetrain.Commands.FieldCentric;
-import frc.robot.Intake.Intake;
-import frc.robot.Intake.Commands.Suck;
-import frc.robot.Shooter.Shooter;
-import frc.robot.Shooter.Commands.Shoot;
+import frc.robot.drivetrain.MechanumDrive;
+import frc.robot.drivetrain.commands.FieldCentric;
+import frc.robot.intake.Intake;
+import frc.robot.intake.commands.Suck;
+import frc.robot.shooter.Shooter;
+import frc.robot.shooter.commands.Shoot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -34,6 +34,17 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+  }
+
+  private void configureBindings() {
+    driver = new Joystick(Constants.OperatorConstants.kDriverControllerPort);
+
+    intakeButton = new JoystickButton(driver, Constants.OperatorConstants.THUMB_BUTTON);
+    trigger = new JoystickButton(driver, Constants.OperatorConstants.TRIGGER);
+
+    intakeButton.whileTrue(new Suck(m_intake));
+    trigger.whileTrue(new Shoot(m_shooter));
+
 
     m_mechanumDrive.setDefaultCommand(
       new FieldCentric(m_mechanumDrive)
@@ -46,18 +57,6 @@ public class RobotContainer {
     m_shooter.setDefaultCommand(
       new Shoot(m_shooter)
     );
-
-
-  }
-
-  private void configureBindings() {
-    driver = new Joystick(Constants.OperatorConstants.kDriverControllerPort);
-    
-    intakeButton = new JoystickButton(driver, Constants.OperatorConstants.THUMB_BUTTON);
-    trigger = new JoystickButton(driver, Constants.OperatorConstants.TRIGGER);
-
-    intakeButton.whileTrue(new Suck(m_intake));
-    trigger.whileTrue(new Shoot(m_shooter));
   }
 
   /**

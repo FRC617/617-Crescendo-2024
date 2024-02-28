@@ -1,4 +1,4 @@
-package frc.robot.Intake;
+package frc.robot.intake;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -17,7 +17,10 @@ public class Intake extends SubsystemBase {
     public static void setIntake(boolean input) {
         if (input) {
             Motor.set(ControlMode.PercentOutput, 1);
+        } else {
+            Motor.set(ControlMode.PercentOutput, 1);
         }
+        
     }
 
     public void initDefaultCommand() {

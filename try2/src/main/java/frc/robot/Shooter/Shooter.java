@@ -1,4 +1,4 @@
-package frc.robot.Shooter;
+package frc.robot.shooter;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -16,6 +16,8 @@ public class Shooter extends SubsystemBase {
 
     public static void setIntake(boolean input) {
         if (input) {
+            Motor.set(ControlMode.PercentOutput, 1);
+        } else {
             Motor.set(ControlMode.PercentOutput, 1);
         }
     }

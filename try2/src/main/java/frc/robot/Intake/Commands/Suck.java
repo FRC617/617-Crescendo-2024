@@ -1,7 +1,7 @@
-package frc.robot.Intake.Commands;
+package frc.robot.intake.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Intake.Intake;
+import frc.robot.intake.Intake;
 
 public class Suck extends Command {
     public final Intake m_subsystem;

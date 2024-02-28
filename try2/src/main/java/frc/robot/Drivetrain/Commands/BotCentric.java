@@ -1,9 +1,9 @@
-package frc.robot.Drivetrain.Commands;
+package frc.robot.drivetrain.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
-import frc.robot.Drivetrain.MechanumDrive;
+import frc.robot.drivetrain.MechanumDrive;
 
 public class BotCentric extends Command {
     public final MechanumDrive m_subsystem;
