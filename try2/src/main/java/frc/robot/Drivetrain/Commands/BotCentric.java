@@ -6,14 +6,14 @@ import frc.robot.Constants;
 import frc.robot.drivetrain.MechanumDrive;
 
 public class BotCentric extends Command {
-    public final MechanumDrive m_subsystem;
+    public final MechanumDrive m_mechanumDrive;
 
     public static Joystick driver;
 
-    public BotCentric(MechanumDrive subsystem) {
-        m_subsystem = subsystem;
+    public BotCentric(MechanumDrive mechanumDrive) {
+        m_mechanumDrive = mechanumDrive;
         // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(subsystem);
+        addRequirements(mechanumDrive);
     }
 
 
@@ -31,7 +31,7 @@ public class BotCentric extends Command {
         double magnitude = Math.hypot(driver.getRawAxis(0), driver.getRawAxis(1));
         double twist = driver.getRawAxis(2);
 
-        MechanumDrive.setMechanumDrive(angle, magnitude, twist);
+        m_mechanumDrive.setDrive(angle, magnitude, twist);
     }
 
      // Make this return true when this Command no longer needs to run execute()
@@ -42,7 +42,7 @@ public class BotCentric extends Command {
     // Called once after isFinished returns true
     public void end() {
         // sets all drive wheels to 0.0
-        MechanumDrive.setMechanumDrive(0.0, 0.0, 0.0);
+        m_mechanumDrive.setDrive(0.0, 0.0, 0.0);
     }
 
     // Called when another command which requires one or more of the same

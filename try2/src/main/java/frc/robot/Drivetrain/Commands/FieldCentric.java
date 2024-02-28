@@ -6,14 +6,14 @@ import frc.robot.Constants;
 import frc.robot.drivetrain.MechanumDrive;
 
 public class FieldCentric extends Command {
-    public final MechanumDrive m_subsystem;
+    public final MechanumDrive m_mechanumDrive;
 
     public static Joystick driver;
 
-    public FieldCentric(MechanumDrive subsystem) {
-        m_subsystem = subsystem;
+    public FieldCentric(MechanumDrive mechanumDrive) {
+        m_mechanumDrive = mechanumDrive;
         // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(subsystem);
+        addRequirements(mechanumDrive);
     }
 
 
@@ -34,7 +34,7 @@ public class FieldCentric extends Command {
         // use field centric controls by subtracting off the robot angle
         angle -= MechanumDrive.Gyro.getAngle();
 
-        MechanumDrive.setMechanumDrive(angle, magnitude, twist);
+        m_mechanumDrive.setDrive(angle, magnitude, twist);
     }
 
      // Make this return true when this Command no longer needs to run execute()
@@ -44,8 +44,7 @@ public class FieldCentric extends Command {
 
     // Called once after isFinished returns true
     public void end() {
-        // sets all drive wheels to 0.0
-        MechanumDrive.setMechanumDrive(0.0, 0.0, 0.0);
+        m_mechanumDrive.setDrive(0.0, 0.0, 0.0);
     }
 
     // Called when another command which requires one or more of the same

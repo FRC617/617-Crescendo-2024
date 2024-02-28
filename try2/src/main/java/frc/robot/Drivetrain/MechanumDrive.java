@@ -8,13 +8,11 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class MechanumDrive extends SubsystemBase {
-    // Motors
     private static TalonSRX FrontLeft;
     private static TalonSRX FrontRight;
     private static TalonSRX BackLeft;
     private static TalonSRX BackRight;
 
-    //Gyro
     public static AnalogGyro Gyro;
 
     public MechanumDrive() {
@@ -26,7 +24,7 @@ public class MechanumDrive extends SubsystemBase {
         Gyro = new AnalogGyro(Constants.DataConstants.GYRO);
     }
 
-    public static void setMechanumDrive(double translationAngle, double translationPower, double turnPower) {
+    public void setDrive(double translationAngle, double translationPower, double turnPower) {
         // calculate motor power
         double ADPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) + Math.cos(translationAngle));
         double BCPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) - Math.cos(translationAngle));

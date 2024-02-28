@@ -4,12 +4,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.intake.Intake;
 
 public class Suck extends Command {
-    public final Intake m_subsystem;
+    public final Intake m_intake;
 
-    public Suck(Intake subsystem) {
-        m_subsystem = subsystem;
+    public Suck(Intake intake) {
+        m_intake = intake;
         // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(subsystem);
+        addRequirements(intake);
     }
 
     // Called just before this Command runs the first time
@@ -19,7 +19,7 @@ public class Suck extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     public void execute() {
-        Intake.setIntake(true);
+        m_intake.setIntake(true);
     }
 
      // Make this return true when this Command no longer needs to run execute()
@@ -30,7 +30,7 @@ public class Suck extends Command {
     // Called once after isFinished returns true
     public void end() {
         // sets all drive wheels to 0.0
-        Intake.setIntake(false);
+        m_intake.setIntake(false);
     }
 
     // Called when another command which requires one or more of the same

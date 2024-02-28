@@ -14,7 +14,7 @@ public class Shooter extends SubsystemBase {
         Motor = new TalonSRX(Constants.MotorConstants.SHOOTER);
     }
 
-    public static void setIntake(boolean input) {
+    public void setShooter(boolean input) {
         if (input) {
             Motor.set(ControlMode.PercentOutput, 1);
         } else {
