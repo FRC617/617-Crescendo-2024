@@ -1,14 +1,21 @@
 package frc.robot.Drivetrain.Commands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-
-import frc.robot.OI;
+import frc.robot.Constants;
 import frc.robot.Drivetrain.MechanumDrive;
 
 public class FieldCentric extends Command {
-    public FieldCentric() {
+    public final MechanumDrive m_subsystem;
 
+    public static Joystick driver;
+
+    public FieldCentric(MechanumDrive subsystem) {
+        m_subsystem = subsystem;
+        // Use addRequirements() here to declare subsystem dependencies.
+        addRequirements(subsystem);
     }
+
 
     // Called just before this Command runs the first time
     public void initialize() {
@@ -17,10 +24,12 @@ public class FieldCentric extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     public void execute() {
+        driver = new Joystick(Constants.OperatorConstants.kDriverControllerPort);
+
         // get joystick input
-        double angle = Math.atan2(OI.driver.getRawAxis(1), OI.driver.getRawAxis(0));
-        double magnitude = Math.hypot(OI.driver.getRawAxis(0), OI.driver.getRawAxis(1));
-        double twist = OI.driver.getTwist();
+        double angle = Math.atan2(driver.getRawAxis(1), driver.getRawAxis(0));
+        double magnitude = Math.hypot(driver.getRawAxis(0), driver.getRawAxis(1));
+        double twist = driver.getTwist();
         
         // use field centric controls by subtracting off the robot angle
         angle -= MechanumDrive.Gyro.getAngle();

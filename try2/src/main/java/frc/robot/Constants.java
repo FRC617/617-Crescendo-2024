@@ -16,7 +16,9 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
 
-    public static final int SIDE_BUTTON = 0;
+    public static final int THUMB_BUTTON = 2;
+    public static final int TRIGGER = 0;
+
   }
 
   public static class MotorConstants {

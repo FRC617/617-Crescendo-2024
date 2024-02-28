@@ -10,7 +10,10 @@ import frc.robot.Intake.Intake;
 import frc.robot.Intake.Commands.Suck;
 import frc.robot.Shooter.Shooter;
 import frc.robot.Shooter.Commands.Shoot;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -23,37 +26,39 @@ public class RobotContainer {
   private final MechanumDrive m_mechanumDrive = new MechanumDrive();
   private final Intake m_intake= new Intake();
   private final Shooter m_shooter = new Shooter();
+  public static Joystick driver;
+  public static JoystickButton intakeButton;
+  public static Trigger trigger;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    // configureBindings();
+    configureBindings();
 
     m_mechanumDrive.setDefaultCommand(
-      new FieldCentric()
+      new FieldCentric(m_mechanumDrive)
     );
 
     m_intake.setDefaultCommand(
-      new Suck()
+      new Suck(m_intake)
     );
 
     m_shooter.setDefaultCommand(
-      new Shoot()
+      new Shoot(m_shooter)
     );
+
+
   }
 
-  /**
-   * Use this method to define your trigger->command mappings. Triggers can be created via the
-   * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
-   * predicate, or via the named factories in {@link
-   * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for {@link
-   * CommandXboxController Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
-   * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
-   * joysticks}.
-   */
-  // private void configureBindings() {
+  private void configureBindings() {
+    driver = new Joystick(Constants.OperatorConstants.kDriverControllerPort);
     
-  // }
+    intakeButton = new JoystickButton(driver, Constants.OperatorConstants.THUMB_BUTTON);
+    trigger = new JoystickButton(driver, Constants.OperatorConstants.TRIGGER);
+
+    intakeButton.whileTrue(new Suck(m_intake));
+    trigger.whileTrue(new Shoot(m_shooter));
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

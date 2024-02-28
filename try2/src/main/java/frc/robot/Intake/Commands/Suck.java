@@ -1,13 +1,15 @@
 package frc.robot.Intake.Commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants;
-import frc.robot.OI;
 import frc.robot.Intake.Intake;
 
 public class Suck extends Command {
-    public Suck() {
+    public final Intake m_subsystem;
 
+    public Suck(Intake subsystem) {
+        m_subsystem = subsystem;
+        // Use addRequirements() here to declare subsystem dependencies.
+        addRequirements(subsystem);
     }
 
     // Called just before this Command runs the first time
@@ -17,10 +19,7 @@ public class Suck extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     public void execute() {
-        // get joystick input
-        boolean button = OI.driver.getRawButtonPressed(Constants.OperatorConstants.SIDE_BUTTON);
-
-        Intake.setIntake(button);
+        Intake.setIntake(true);
     }
 
      // Make this return true when this Command no longer needs to run execute()
